@@ -1,0 +1,7 @@
+#box{
+    width: 1000px;
+    height: 800px;
+    margin: auto;
+    position:relative;
+    background-image: url(../img/floor.png);
+}
