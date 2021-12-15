@@ -18,7 +18,12 @@ $app = new \Slim\App($c);
 
 $app->get('/carte', function (Request $rq, Response $rs, array $args):Response{
     $control = new Controleur($this);
-    return $control->getCollection($rq, $rs, $args);
+    return $control->getCarte($rq, $rs, $args);
+});
+
+$app->get('/controleur', function (Request $rq, Response $rs, array $args):Response{
+    $control = new Controleur($this);
+    return $control->getControleur($rq, $rs, $args);
 });
 
 

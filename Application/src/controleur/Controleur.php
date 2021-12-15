@@ -17,13 +17,23 @@ class Controleur
         $this->htmlvars = [];
     }
 
-    function getCollection(Request $rq, Response $rs, array $args ):Response{
+    function getCarte(Request $rq, Response $rs, array $args ):Response{
         $htmlvars = [
             'basepath' => $rq->getUri()->getBasePath(),
         ];
         $vue = new VueParticipant([], $this->c);
         $this->htmlvars['basepath'] = $rq->getUri()->getPath();
-        $rs->getBody()->write($vue->render($htmlvars));
+        $rs->getBody()->write($vue->carte($htmlvars));
+        return $rs;
+    }
+
+    function getControleur(Request $rq, Response $rs, array $args ):Response{
+        $htmlvars = [
+            'basepath' => $rq->getUri()->getBasePath(),
+        ];
+        $vue = new VueParticipant([], $this->c);
+        $this->htmlvars['basepath'] = $rq->getUri()->getPath();
+        $rs->getBody()->write($vue->controleur($htmlvars));
         return $rs;
     }
 }
