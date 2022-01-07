@@ -17,6 +17,16 @@ class Controleur
         $this->htmlvars = [];
     }
 
+    function getNeurone(Request $rq, Response $rs, array $args ):Response{
+        $htmlvars = [
+            'basepath' => $rq->getUri()->getBasePath(),
+        ];
+        $vue = new VueParticipant([], $this->c);
+        $this->htmlvars['basepath'] = $rq->getUri()->getPath();
+        $rs->getBody()->write($vue->neurone($htmlvars));
+        return $rs;
+    }
+
     function getCarte(Request $rq, Response $rs, array $args ):Response{
         $htmlvars = [
             'basepath' => $rq->getUri()->getBasePath(),
@@ -27,13 +37,4 @@ class Controleur
         return $rs;
     }
 
-    function getControleur(Request $rq, Response $rs, array $args ):Response{
-        $htmlvars = [
-            'basepath' => $rq->getUri()->getBasePath(),
-        ];
-        $vue = new VueParticipant([], $this->c);
-        $this->htmlvars['basepath'] = $rq->getUri()->getPath();
-        $rs->getBody()->write($vue->controleur($htmlvars));
-        return $rs;
-    }
 }

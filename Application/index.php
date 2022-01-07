@@ -16,14 +16,14 @@ $config = require_once './src/conf/settings.php';
 $c = new \Slim\Container($config);
 $app = new \Slim\App($c);
 
+$app->get('/neurone', function (Request $rq, Response $rs, array $args):Response{
+    $control = new Controleur($this);
+    return $control->getNeurone($rq, $rs, $args);
+});
+
 $app->get('/carte', function (Request $rq, Response $rs, array $args):Response{
     $control = new Controleur($this);
     return $control->getCarte($rq, $rs, $args);
-});
-
-$app->get('/controleur', function (Request $rq, Response $rs, array $args):Response{
-    $control = new Controleur($this);
-    return $control->getControleur($rq, $rs, $args);
 });
 
 
