@@ -14,7 +14,7 @@ window.onload = function () {
     const container = new PIXI.Container();
     app.stage.addChild(container);
     // Nono
-    nono = new PIXI.Sprite.from("/Application/img/nono.png");
+    nono = new PIXI.Sprite.from("./web/img/nono.png");
     nono.anchor.set(0.5);
     nono.x = app.view.width / 2;
     nono.y = app.view.height / 1.5;
@@ -47,7 +47,7 @@ window.onload = function () {
     //ajout du cube vert
     let vert;
     let speed = 4;
-    vert = new PIXI.Sprite.from('img/pipe.png');
+    vert = new PIXI.Sprite.from('./web/img/pipe.png');
     vert.anchor.set(0.5);
     vert.x = 20;
     vert.y = app.view.height / 2;
@@ -55,7 +55,7 @@ window.onload = function () {
     container.addChild(vert);
 
     let vert2;
-    vert2 = new PIXI.Sprite.from('img/pipe.png');
+    vert2 = new PIXI.Sprite.from('./web/img/pipe.png');
     vert2.anchor.set(0.5);
     vert2.x = app.view.width - 20;
     vert2.y = app.view.height / 2;
