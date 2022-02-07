@@ -16,43 +16,48 @@
 
 <body>
 
-  <script src="pixi/pixi.min.js"></script>
-  <script src="js/globals.js"></script>
-  <script src="js/robot.js"></script>
-  <script src="js/cherry.js"></script>
-  <script src="js/main.js"></script>
-  <script src="js/buttons.js"></script>
-
-<!-- contrôleur -->
-  <div class="controleur">
-    <!-- buttons -->
-    <div id="start" class="bg-primary buttons text-center">
-      <a onclick="playAction()" title="play">
-        <i class="bi bi-play-circle"></i>
-      </a>
-      <a onclick="pauseAction()">
-        <i class="bi bi-pause-circle" title="pause"></i>
-      </a>
-      <a onclick="stopAction()">
-        <i class="bi bi-stop-circle" title="stop"></i>
-      </a>
-      <a onclick="restartAction()" title="restart">
-        <i class="bi bi-arrow-counterclockwise"></i>
-      </a>
-      <a onclick="saveAction()" title="save">
-        <i class="bi bi-save2"></i>
-      </a>
-    </div>
-    <!-- neurone -->
-    <div id="myDiagramDiv"></div>
-  </div>
-
+<script src="pixi/pixi.min.js"></script>
+<script src="js/globals.js"></script>
+<script src="js/robot.js"></script>
+<script src="js/cherry.js"></script>
+<script src="js/main.js"></script>
+<script src="js/buttons.js"></script>
 
 <!-- nono bouger -->
-  <script type="text/javascript">
-    demo_init();
-  </script>
+<script type="text/javascript">
+  demo_init();
+</script>
 
+
+<div class="row">
+  <div class="col p-0" id="carte"></div>
+  <div class="col center-block p-0">
+
+    <!-- contrôleur -->
+    <div class="controleur">
+      <!-- buttons -->
+      <div id="start" class="bg-primary buttons text-center">
+        <a>
+          <i class="bi bi-play-circle"></i>
+        </a>
+        <a onclick="pauseAction()">
+          <i class="bi bi-pause-circle"></i>
+        </a>
+        <a onclick="stopAction()">
+          <i class="bi bi-stop-circle"></i>
+        </a>
+        <a onclick="restartAction()">
+          <i class="bi bi-arrow-counterclockwise"></i>
+        </a>
+        <a onclick="saveAction()">
+          <i class="bi bi-save2"></i>
+        </a>
+      </div>
+      <!-- neurone -->
+      <div id="myDiagramDiv"></div>
+    </div>
+  </div>
+</div>
 
 
 </body>

@@ -10,9 +10,9 @@ function demo_init(){
     
     // Create a Pixi Application
     
-    app = new PIXI.Application({ 
-	width: 400,         // default: 800
-	height: 400,        // default: 600
+    app = new PIXI.Application({
+	width: 1200,        // default: 800
+	height: 800,        // default: 600
 	antialias: true,    // default: false
 	transparent: false, // default: false
 	resolution: 1       // default: 1
@@ -41,11 +41,11 @@ function demo_start() {
   
     // Add the canvas (app.view) to the HTML document
 
-    document.body.appendChild(app.view);
+	document.getElementById("carte").appendChild(app.view);
 
     // Set the background
 
-    app.renderer.backgroundColor = 0xdddddd;
+    app.renderer.backgroundColor = 0x000000;
            
     if (! debug ){
 	
