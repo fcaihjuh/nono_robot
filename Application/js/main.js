@@ -1,3 +1,6 @@
+import go from "./go-debug.js";
+document.querySelector("#start").addEventListener("click", ()=>{ console.log(go.save()) })
+
 function demo_init(){
 
     // check for WebGL
@@ -112,6 +115,11 @@ function game_loop(delta) {
 	console.log(sensors);
     }
   	
+}
+
+
+export default{
+	demo_init: demo_init,
 }
 
 

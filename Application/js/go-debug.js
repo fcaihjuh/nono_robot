@@ -1,4 +1,4 @@
-document.querySelector("#start").addEventListener("click", save)
+//document.querySelector("#start").addEventListener("click", save)
 let objGo = go.GraphObject.make;
 let myDiagram = objGo(go.Diagram, "myDiagramDiv",
     {
@@ -87,8 +87,7 @@ function save() {
     let w3 = linkDataArray[2].text
     let w4 = linkDataArray[3].text
 
-    console.log(calculerMG(w1, w3))
-    console.log(calculerMD(w2, w4))
+    return [calculerMG(w1, w3), calculerMD(w2, w4)]
 }
 
 
@@ -100,6 +99,10 @@ function calculerMG(w1, w3){
 
 function calculerMD(w2, w4){
     return  Math.tanh(w2 * EG + w4 * ED);
+}
+
+export default{
+    save: save,
 }
 
 

@@ -20,12 +20,13 @@
 <script src="js/globals.js"></script>
 <script src="js/robot.js"></script>
 <script src="js/cherry.js"></script>
-<script src="js/main.js"></script>
+<script type="module" src="js/main.js"></script>
 <script src="js/buttons.js"></script>
 
 <!-- nono bouger -->
-<script type="text/javascript">
-  demo_init();
+<script type="module">
+  import main from "./js/main.js";
+  main.demo_init();
 </script>
 
 
@@ -78,5 +79,5 @@
 
 
 </body>
-<script src="js/go-debug.js"></script>
+<script type="module" src="js/go-debug.js"></script>
 </html>
