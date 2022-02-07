@@ -2,26 +2,31 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Hello World</title>
+  <title>Nono</title>
   <link rel="stylesheet" href=css/style.css>
-  <!-- boootstrap -->
+  <!-- boootstrap vue-->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+  <!-- boootstrap icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+  <!-- gojs -->
   <script src="https://unpkg.com/gojs/release/go-debug.js"></script>
 </head>
 
 <body>
-<!-- nono bouger -->
+
   <script src="pixi/pixi.min.js"></script>
   <script src="js/globals.js"></script>
   <script src="js/robot.js"></script>
   <script src="js/cherry.js"></script>
   <script src="js/main.js"></script>
-  
-  <div class="wrapper">
-    <div class="buttons">
+  <script src="js/buttons.js"></script>
+
+<!-- contrôleur -->
+  <div class="controleur">
+    <!-- buttons -->
+    <div id="start" class="bg-primary buttons text-center">
       <a onclick="playAction()">
         <i class="bi bi-play-circle"></i>
       </a>
@@ -38,19 +43,18 @@
         <i class="bi bi-save2"></i>
       </a>
     </div>
-    
+    <!-- neurone -->
+    <div id="myDiagramDiv"></div>
+  </div>
+
+
+<!-- nono bouger -->
   <script type="text/javascript">
     demo_init();
   </script>
 
-<!-- neurone -->
-  <div id="myDiagramDiv"></div>
-  <button id="start" type="button" class="btn btn-success">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-skip-start-circle-fill" viewBox="0 0 16 16">
-      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM9.71 5.093 7 7.028V5.5a.5.5 0 0 0-1 0v5a.5.5 0 0 0 1 0V8.972l2.71 1.935a.5.5 0 0 0 .79-.407v-5a.5.5 0 0 0-.79-.407z"></path>
-    </svg>
-    Start
-  </button>
+
+
 </body>
 <script src="js/go-debug.js"></script>
 </html>
