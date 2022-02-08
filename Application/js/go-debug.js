@@ -79,25 +79,24 @@ myDiagram.addDiagramListener("Modified", function() {
 });
 
 
-let EG = 0.1, ED = 0.1;
-function save() {
+function save(EG, ED) {
     let linkDataArray = JSON.parse(myDiagram.model.toJson()).linkDataArray;
     let w1 = linkDataArray[0].text
     let w2 = linkDataArray[1].text
     let w3 = linkDataArray[2].text
     let w4 = linkDataArray[3].text
 
-    return [calculerMG(w1, w3), calculerMD(w2, w4)]
+    return [calculerMG(EG, ED, w1, w3), calculerMD(EG, ED, w2, w4)]
 }
 
 
 
-function calculerMG(w1, w3){
+function calculerMG(EG, ED, w1, w3){
     return Math.tanh(w1 * EG + w3 * ED) ;
 }
 
 
-function calculerMD(w2, w4){
+function calculerMD(EG, ED, w2, w4){
     return  Math.tanh(w2 * EG + w4 * ED);
 }
 

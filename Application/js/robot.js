@@ -193,13 +193,13 @@ class Robot extends PIXI.Container {
 
     }
 
-    random_controller(sensors) {
+    random_controller(vl, vr, sensors) {
 	
 	let dice = Math.random();
 
 	// move straight 
-	let vl = 1;
-	let vr = 1;
+	//let vl = 1;
+	//let vr = 1;
 
 	// but once in wihile turn randomly
 	if (dice < 0.2){
