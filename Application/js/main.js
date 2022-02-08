@@ -1,5 +1,4 @@
 import go from "./go-debug.js";
-document.querySelector("#start").addEventListener("click", ()=>{ console.log(go.save()) })
 
 function demo_init(){
 
@@ -79,11 +78,14 @@ function demo_start() {
     }
     
     // Add a ticker (calls a function 60 time per sec)
-    app.ticker.add((delta) => game_loop(delta));
+	document.querySelector("#start").addEventListener("click", ()=>{
+		console.log(go.save())
+		app.ticker.add((delta) => game_loop(go.save()[0], go.save()[1], delta));
+	})
     
 }
 
-function game_loop(delta) {
+function game_loop(vl, vr, delta) {
     
     // update time and tics
     let dt = delta/60;
@@ -99,8 +101,8 @@ function game_loop(delta) {
 	// compute controller
 	let motor = nono.random_controller( sensors );
 	
-	// move robot 
-	nono.move(motor[0], motor[1], dt);
+	// move robot
+	nono.move(vl, vr, dt);
 
     }
 

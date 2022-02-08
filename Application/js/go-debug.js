@@ -79,7 +79,7 @@ myDiagram.addDiagramListener("Modified", function() {
 });
 
 
-let EG = 0, ED = 1;
+let EG = 0.1, ED = 0.1;
 function save() {
     let linkDataArray = JSON.parse(myDiagram.model.toJson()).linkDataArray;
     let w1 = linkDataArray[0].text
