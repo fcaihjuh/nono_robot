@@ -14,8 +14,8 @@ function demo_init(){
     // Create a Pixi Application
     
     app = new PIXI.Application({
-	width: 1200,        // default: 800
-	height: 800,        // default: 600
+	width: 850,        // default: 800
+	height: 500,        // default: 600
 	antialias: true,    // default: false
 	transparent: false, // default: false
 	resolution: 1       // default: 1
