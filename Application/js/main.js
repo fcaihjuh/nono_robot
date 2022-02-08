@@ -35,10 +35,20 @@ function demo_init(){
 	  // when finished loading images, start everyting else
 
 	  demo_start();
-	  
+
+	  document.querySelector("#stop").addEventListener("click", ()=>{
+	  	app.ticker.stop();
+	  })
+
 	});
 }
-	      
+
+function demo_stop() {
+	tics = 0;
+	elapsed = 0.0;
+
+}
+
 function demo_start() {
   
     // Add the canvas (app.view) to the HTML document
@@ -80,6 +90,7 @@ function demo_start() {
     // Add a ticker (calls a function 60 time per sec)
 	document.querySelector("#start").addEventListener("click", ()=>{
 		app.ticker.add((delta) => game_loop(go.save(0, 1)[0], go.save(0, 1)[1], delta));
+		app.ticker.start()
 	})
     
 }
