@@ -89,7 +89,7 @@ function demo_start() {
     
     // Add a ticker (calls a function 60 time per sec)
 	document.querySelector("#start").addEventListener("click", ()=>{
-		app.ticker.add((delta) => game_loop(go.save(0, 1)[0], go.save(0, 1)[1], delta));
+		app.ticker.add((delta) => game_loop(go.save(1, 1)[0], go.save(1, 1)[1], delta));
 		app.ticker.start()
 	})
     
@@ -98,7 +98,7 @@ function demo_start() {
 function game_loop(vl, vr, delta) {
     
     // update time and tics
-    let dt = delta/60;
+    let dt = delta/100;
     elapsed += dt;
     tics++;
 
@@ -109,12 +109,13 @@ function game_loop(vl, vr, delta) {
 	let sensors = nono.read_sensors();
 
 	// compute controller
-	let motor = nono.random_controller( vl, vr,  sensors );
-	
+	let motor = nono.detect_controller( vl, vr,  sensors );
+
+	console.log(sensors);
 	// move robot
 	//nono.move(vl, vr, dt);
 	nono.move(motor[0], motor[1], dt);
-	console.log(sensors);
+
 
     }
 
@@ -123,7 +124,8 @@ function game_loop(vl, vr, delta) {
     if (debug &&  (tics % act_rate) == 0 && tics < 100 ){
 	
 	let sensors = nono.read_sensors();
-	let motor = [1,1]
+	//let motor = [1,1]
+		let motor = nono.detect_controller(vl, vr,  sensors)
 	nono.move(motor[0], motor[1], dt);
 
 	//console.log(sensors);

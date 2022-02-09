@@ -7,7 +7,7 @@ const sensor_angles  = [ -Math.PI/8, Math.PI/8];
 
 
 
-const num_cherries = 50;
+const num_cherries = 20;
       
 let app;
 
