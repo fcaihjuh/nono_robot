@@ -35,18 +35,15 @@ function demo_init(){
 	  // when finished loading images, start everyting else
 
 	  demo_start();
-
-	  document.querySelector("#stop").addEventListener("click", ()=>{
-	  	app.ticker.stop();
-	  })
+	  demo_stop();
 
 	});
 }
 
 function demo_stop() {
-	tics = 0;
-	elapsed = 0.0;
-
+	document.querySelector("#stop").addEventListener("click", ()=>{
+		app.ticker.stop();
+	})
 }
 
 function demo_start() {
