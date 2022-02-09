@@ -212,7 +212,7 @@ class Robot extends PIXI.Container {
 	return [vl,vr];
     }
 
-    detect_controller(vl, vr, sensors){
+    controller(vl, vr, sensors){
 
 		if (sensors[1] !== sensors[0]){
 			if (sensors[1] > sensors[0])

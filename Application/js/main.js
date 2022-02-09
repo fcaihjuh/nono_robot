@@ -106,7 +106,7 @@ function game_loop(vl, vr, delta) {
 	let sensors = nono.read_sensors();
 
 	// compute controller
-	let motor = nono.detect_controller( vl, vr,  sensors );
+	let motor = nono.controller( vl, vr,  sensors );
 
 	console.log(sensors);
 	// move robot
