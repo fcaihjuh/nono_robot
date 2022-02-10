@@ -1,4 +1,4 @@
-import go from "./go-debug.js";
+//import go from "./nn-controller.js";
 
 function demo_init(){
 
@@ -35,7 +35,7 @@ function demo_init(){
 	  // when finished loading images, start everyting else
 
 	  demo_start();
-	  demo_stop();
+	  //demo_stop();
 
 	});
 }
@@ -46,11 +46,26 @@ function demo_stop() {
 	})
 }
 
+function demo_reset() {
+
+
+	nono.reset();
+	for (let i=0; i<num_cherries; i++) {
+			cherries[i].relocate();
+	}
+	elapsed =0;
+	tics = 0;
+     pause = true;
+}
+
+
+
+
 function demo_start() {
   
     // Add the canvas (app.view) to the HTML document
 
-	document.getElementById("carte").appendChild(app.view);
+	document.body.appendChild(app.view);
 
     // Set the background
 
@@ -83,21 +98,21 @@ function demo_start() {
 	app.stage.addChild( nono );
     
     }
-    
-    // Add a ticker (calls a function 60 time per sec)
+
 	document.querySelector("#start").addEventListener("click", ()=>{
-		app.ticker.add((delta) => game_loop(go.save(1, 1)[0], go.save(1, 1)[1], delta));
-		app.ticker.start()
+		nono.set_nn_parameter(get_nn_parameter());
+		app.ticker.add((delta) => game_loop(delta));
 	})
     
 }
 
-function game_loop(vl, vr, delta) {
-    
-    // update time and tics
-    let dt = delta/100;
-    elapsed += dt;
-    tics++;
+function game_loop(delta) {
+
+	if (!paused) {
+		// update time and tics
+		let dt = delta / 60;
+		elapsed += dt;
+		tics++;
 
     // robot sens/ act loop 
     if (! debug && (tics % act_rate) == 0){
@@ -106,9 +121,10 @@ function game_loop(vl, vr, delta) {
 	let sensors = nono.read_sensors();
 
 	// compute controller
-	let motor = nono.controller( vl, vr,  sensors );
+	let motor = nono.nero_controller( sensors );
+	//console.log(motor);
 
-	console.log(sensors);
+	//console.log(sensors);
 	// move robot
 	//nono.move(vl, vr, dt);
 	nono.move(motor[0], motor[1], dt);
@@ -117,23 +133,20 @@ function game_loop(vl, vr, delta) {
     }
 
 
-    // debugging stuff  move robot and then stop
-    if (debug &&  (tics % act_rate) == 0 && tics < 100 ){
-	
-	let sensors = nono.read_sensors();
-	//let motor = [1,1]
-		let motor = nono.detect_controller(vl, vr,  sensors)
-	nono.move(motor[0], motor[1], dt);
+		// debugging stuff  move robot and then stop
+		if (debug && (tics % act_rate) == 0 && tics < 100) {
 
-	//console.log(sensors);
-    }
-  	
+			let sensors = nono.read_sensors();
+			//let motor = [1,1]
+			let motor = nono.nero_controller(sensors)
+			nono.move(motor[0], motor[1], dt);
+
+			console.log(sensors);
+		}
+	}
 }
 
 
-export default{
-	demo_init: demo_init,
-}
 
 
 

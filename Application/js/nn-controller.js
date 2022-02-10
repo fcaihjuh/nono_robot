@@ -79,6 +79,19 @@ myDiagram.addDiagramListener("Modified", function() {
 });
 
 
+//let nono = new Robot(1, 2, 3);
+
+function get_nn_parameter() {
+    let linkDataArray = JSON.parse(myDiagram.model.toJson()).linkDataArray;
+    let w1 = linkDataArray[0].text
+    let w2 = linkDataArray[1].text
+    let w3 = linkDataArray[2].text
+    let w4 = linkDataArray[3].text
+    //set_nn_parameter([w1, w2, w3, w4]);
+    return [w1, w2, w3, w4]
+}
+
+/*
 function save(EG, ED) {
     let linkDataArray = JSON.parse(myDiagram.model.toJson()).linkDataArray;
     let w1 = linkDataArray[0].text
@@ -100,8 +113,8 @@ function calculerMD(EG, ED, w2, w4){
     return  Math.tanh(w2 * EG + w4 * ED);
 }
 
-export default{
-    save: save,
-}
+ */
+
+
 
 
