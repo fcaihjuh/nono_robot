@@ -22,10 +22,10 @@ myModel.nodeDataArray = [
 
 myModel.linkDataArray =
     [
-        { from: "EG", to: "MG", poid: "w1" },
-        { from: "EG", to: "MD", poid: "w2" },
-        { from: "ED", to: "MG", poid: "w3" },
-        { from: "ED", to: "MD", poid: "w4" },
+        { from: "EG", to: "MG", poid: "w1", text: 10 },
+        { from: "EG", to: "MD", poid: "w2", text: 0 },
+        { from: "ED", to: "MG", poid: "w3", text: 0 },
+        { from: "ED", to: "MD", poid: "w4", text: 10 },
     ];
 
 myDiagram.model = myModel;
