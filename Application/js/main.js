@@ -39,12 +39,14 @@ function demo_init(){
 
 	});
 }
-
+/*
 function demo_stop() {
 	document.querySelector("#stop").addEventListener("click", ()=>{
 		app.ticker.stop();
 	})
 }
+
+ */
 
 function demo_reset() {
 
@@ -99,16 +101,26 @@ function demo_start() {
     
     }
 
-	document.querySelector("#start").addEventListener("click", ()=>{
-		nono.set_nn_parameter(get_nn_parameter());
-		app.ticker.add((delta) => game_loop(delta));
-	})
+    let start = document.querySelector("#start");
+	start.onclick = function () {
+		console.log(paused);
+		if(!paused){
+			nono.set_nn_parameter(get_nn_parameter());
+			app.ticker.add((delta) => game_loop(delta));
+			app.ticker.start();
+			//console.log(this.paused);
+		}else{
+			app.ticker.stop();
+			//console.log(this.paused);
+		}
+		paused = !paused;
+	}
     
 }
 
 function game_loop(delta) {
 
-	if (!paused) {
+	//if (!paused) {
 		// update time and tics
 		let dt = delta / 60;
 		elapsed += dt;
@@ -134,16 +146,16 @@ function game_loop(delta) {
 
 
 		// debugging stuff  move robot and then stop
-		if (debug && (tics % act_rate) == 0 && tics < 100) {
+	if (debug && (tics % act_rate) == 0 && tics < 100) {
 
-			let sensors = nono.read_sensors();
-			//let motor = [1,1]
-			let motor = nono.nero_controller(sensors)
-			nono.move(motor[0], motor[1], dt);
+		let sensors = nono.read_sensors();
+		//let motor = [1,1]
+		let motor = nono.nero_controller(sensors)
+		nono.move(motor[0], motor[1], dt);
 
-			console.log(sensors);
-		}
+		console.log(sensors);
 	}
+	//}
 }
 
 

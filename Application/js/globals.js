@@ -5,7 +5,7 @@ const sensor_range   = 200;
 const sensor_fov     = Math.PI/6;
 const sensor_angles  = [ -Math.PI/8, Math.PI/8]; 
 
-const paused = false;
+let paused = false;
 const bias_value = 1;
 
 const num_cherries = 50;

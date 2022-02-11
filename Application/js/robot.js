@@ -227,7 +227,7 @@ class Robot extends PIXI.Container {
 
 	set_nn_parameter(param) {
 		this.nn_parametres = param;
-		console.log(this.nn_parametres);
+		//console.log(this.nn_parametres);
 	}
 
 
