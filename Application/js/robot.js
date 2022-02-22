@@ -90,59 +90,101 @@ class Robot extends PIXI.Container {
     }
 
     read_sensors(){
-	
-	// check if a cherry is within the circle sensor_range
-	const hits = [];
-	
-	for (let i=0; i<num_cherries; i++) {
-	    let dist=Math.sqrt((cherries[i].x-this.x)**2 +
-			       (cherries[i].y-this.y)**2);
-	    if (dist<sensor_range && dist != 0 )
-		hits.push([cherries[i], dist]);
+
+	// check if a obstacle is within the circle sensor_range
+	const hits_obstacle = [];
+
+	for (let i=0; i<num_obstacles; i++) {
+		let dist=Math.sqrt((obstacles[i].x-this.x)**2 +
+			(obstacles[i].y-this.y)**2);
+		if (dist<sensor_range && dist != 0 ){
+			hits_obstacle.push([obstacles[i], dist]);
+			hits.push(obstacles[i]);
+		}
 	}
 
 
-	// reset sensor values 
+	// reset sensor values of obstacle
 	for (let j=0; j<this.sensors.length; j++)
 	    this.sensor_values[j] = Infinity;
-	
-	// for all hits check where they fall
-	for (let i=0; i<hits.length; i++) {
-	    
-	    const cherry = hits[i][0] ;
-	    const dist   = hits[i][1] ;
-	    
-	    // get position & angle of cherry i in nono coordinate system 
-	    let x = this.sprite.toLocal(cherry.position).x;
-	    let y = this.sprite.toLocal(cherry.position).y;
-	    let a = Math.atan2(y,x);
 
-	    // are we very close then eat the cherry
-	    if (x < (this.robot_w+cherry.width)/2 &&
-		x > -(this.robot_w+cherry.width)/2 &&
-		y < (this.robot_h+cherry.height)/2 &&
-		y > -(this.robot_h+cherry.height)/2 ){
+		for (let i=0; i<hits_obstacle.length; i++) {
 
-		// eat 
-		cherry.relocate();
-		
-	    } else {
-	    
-		// get readings and update  
-		for (let j=0; j<this.sensors.length; j++){
-		    let s = this.sensors[j];
-		    
-		    this.sensor_values[j] = Math.min(this.sensor_values[j],
-						     s.read( a , dist ))
+			const obs = hits_obstacle[i][0] ;
+			const dist   = hits_obstacle[i][1] ;
+
+			// get position & angle of cherry i in nono coordinate system
+			let x = this.sprite.toLocal(obs.position).x;
+			let y = this.sprite.toLocal(obs.position).y;
+			let a = Math.atan2(y,x);
+
+			// are we very close then eat the cherry
+			if (x < (this.robot_w+obs.width)/2 &&
+				x > -(this.robot_w+obs.width)/2 &&
+				y < (this.robot_h+obs.height)/2 &&
+				y > -(this.robot_h+obs.height)/2 ){
+			} else {
+
+				// get readings and update
+				for (let j=0; j<this.sensors.length; j++){
+					let s = this.sensors[j];
+
+					this.sensor_values[j] = Math.min(this.sensor_values[j],
+						s.read( a , dist ))
+				}
+			}
 		}
-	    }
-	}
 
-	// replace infinity by zeros
-	for (let j=0; j<this.sensors.length; j++)
-	    if (this.sensor_values[j] === Infinity)
-		this.sensor_values[j] = 0;
-	return this.sensor_values;
+		// check if a cherry is within the circle sensor_range
+		const hits_cherry = [];
+
+		for (let i=0; i<num_cherries; i++) {
+			let dist=Math.sqrt((cherries[i].x-this.x)**2 +
+				(cherries[i].y-this.y)**2);
+			if (dist<sensor_range && dist != 0 ){
+				hits_cherry.push([cherries[i], dist]);
+				hits.push(cherries[i]);
+			}
+		}
+
+		// for all hits check where they fall
+		for (let i=0; i<hits_cherry.length; i++) {
+
+			const cherry = hits_cherry[i][0] ;
+			const dist   = hits_cherry[i][1] ;
+
+			// get position & angle of cherry i in nono coordinate system
+			let x = this.sprite.toLocal(cherry.position).x;
+			let y = this.sprite.toLocal(cherry.position).y;
+			let a = Math.atan2(y,x);
+
+			// are we very close then eat the cherry
+			if (x < (this.robot_w+cherry.width)/2 &&
+			x > -(this.robot_w+cherry.width)/2 &&
+			y < (this.robot_h+cherry.height)/2 &&
+			y > -(this.robot_h+cherry.height)/2 ){
+
+			// eat
+			cherry.relocate();
+
+			} else {
+
+			// get readings and update
+			for (let j=0; j<this.sensors.length; j++){
+				let s = this.sensors[j];
+
+				this.sensor_values[j] = Math.min(this.sensor_values[j],
+								 s.read( a , dist ))
+			}
+			}
+		}
+
+
+		// replace infinity by zeros
+		for (let j=0; j<this.sensors.length; j++)
+			if (this.sensor_values[j] === Infinity)
+			this.sensor_values[j] = 0;
+		return this.sensor_values;
     }
    
     
@@ -231,19 +273,26 @@ class Robot extends PIXI.Container {
 	}
 
 
-    nero_controller(sensors){
+    close_controller(sensors){
 		let vr;
 		let vl;
 
-    	//console.log(sensors);
-
-		//vr = Math.tanh(sensors[0] * this.nn_parametres[0] + this.nn_parametres[2] * sensors[1]);
-		//vl = Math.tanh( this.nn_parametres[1] * sensors[0] + sensors[1] * this.nn_parametres[3] );
 		vr = Math.tanh(sensors[0] * this.nn_parametres[0] +
 						this.nn_parametres[2] * sensors[1] + bias_value);
 		vl = Math.tanh(sensors[0] * this.nn_parametres[1] +
 						this.nn_parametres[3] * sensors[1] + bias_value);
 
+		return [vr, vl];
+	}
+
+	avoid_controller(sensors){
+		let vr;
+		let vl;
+
+		vl = Math.tanh(sensors[0] * this.nn_parametres[0] +
+			this.nn_parametres[2] * sensors[1] + bias_value);
+		vr = Math.tanh(sensors[0] * this.nn_parametres[1] +
+			this.nn_parametres[3] * sensors[1] + bias_value);
 
 		return [vr, vl];
 	}

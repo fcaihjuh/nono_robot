@@ -25,28 +25,22 @@ function demo_init(){
     PIXI.Loader.shared
       .add('robot', "assets/nono-small.png")
       .add('cherry', "assets/cherry.png")
+		.add('obstacle', "assets/obstacle.png")
       .load(( loader, resources ) => {
 	    
 	  //make sprites 
 
 	  textures.robot = resources.robot.texture;
 	  textures.cherry = resources.cherry.texture;
+		  textures.obstacle = resources.obstacle.texture;
 	  
 	  // when finished loading images, start everyting else
 
 	  demo_start();
-	  //demo_stop();
 
 	});
 }
-/*
-function demo_stop() {
-	document.querySelector("#stop").addEventListener("click", ()=>{
-		app.ticker.stop();
-	})
-}
 
- */
 
 function demo_reset() {
 
@@ -78,8 +72,9 @@ function demo_start() {
 	// Add food and a robot 
 	make_cherries(num_cherries, app.stage) ;
 	make_robot(app.stage);
-	
-    }
+	make_obstacle(num_obstacles, app.stage);
+
+	}
     else {
 	//DEBUG
 	
@@ -108,10 +103,8 @@ function demo_start() {
 			nono.set_nn_parameter(get_nn_parameter());
 			app.ticker.add((delta) => game_loop(delta));
 			app.ticker.start();
-			//console.log(this.paused);
 		}else{
 			app.ticker.stop();
-			//console.log(this.paused);
 		}
 		paused = !paused;
 	}
@@ -120,26 +113,29 @@ function demo_start() {
 
 function game_loop(delta) {
 
-	//if (!paused) {
-		// update time and tics
-		let dt = delta / 60;
-		elapsed += dt;
-		tics++;
+
+	// update time and tics
+	let dt = delta / 60;
+	elapsed += dt;
+	tics++;
 
     // robot sens/ act loop 
     if (! debug && (tics % act_rate) == 0){
 
 	// read sensors   
 	let sensors = nono.read_sensors();
-
+	let motor;
 	// compute controller
-	let motor = nono.nero_controller( sensors );
-	//console.log(motor);
-
-	//console.log(sensors);
-	// move robot
-	//nono.move(vl, vr, dt);
-	nono.move(motor[0], motor[1], dt);
+		hits.forEach(obj => {
+			if (obj instanceof Cherry){
+				motor = nono.close_controller( sensors );
+				//console.log(motor + " cherry")
+			}else{
+				motor = nono.avoid_controller( sensors );
+				//console.log(motor + " obstacle")
+			}
+		})
+		nono.move(motor[0], motor[1], dt);
 
 
     }
@@ -155,7 +151,7 @@ function game_loop(delta) {
 
 		console.log(sensors);
 	}
-	//}
+
 }
 
 
