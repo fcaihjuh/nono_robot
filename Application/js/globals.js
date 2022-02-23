@@ -8,7 +8,7 @@ const sensor_angles  = [ -Math.PI/8, Math.PI/8];
 let paused = false;
 const bias_value = 1;
 
-const num_cherries  = 10;
+const num_cherries  = 5;
 const num_obstacles = 10;
       
 let app;

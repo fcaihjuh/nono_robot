@@ -25,14 +25,14 @@ function demo_init(){
     PIXI.Loader.shared
       .add('robot', "assets/nono-small.png")
       .add('cherry', "assets/cherry.png")
-		.add('obstacle', "assets/obstacle.png")
+	  .add('obstacle', "assets/obstacle.png")
       .load(( loader, resources ) => {
 	    
 	  //make sprites 
 
 	  textures.robot = resources.robot.texture;
 	  textures.cherry = resources.cherry.texture;
-		  textures.obstacle = resources.obstacle.texture;
+	  textures.obstacle = resources.obstacle.texture;
 	  
 	  // when finished loading images, start everyting else
 
@@ -44,14 +44,15 @@ function demo_init(){
 
 function demo_reset() {
 
-
 	nono.reset();
+
 	for (let i=0; i<num_cherries; i++) {
-			cherries[i].relocate();
+		cherries[i].relocate();
 	}
+
 	elapsed =0;
 	tics = 0;
-     pause = true;
+	pause = true;
 }
 
 
@@ -103,8 +104,12 @@ function demo_start() {
 			nono.set_nn_parameter(get_nn_parameter());
 			app.ticker.add((delta) => game_loop(delta));
 			app.ticker.start();
+			start.classList.remove("bi-play-circle");
+			start.classList.add('bi-pause-circle')
 		}else{
 			app.ticker.stop();
+			start.classList.remove("bi-pause-circle");
+			start.classList.add('bi-play-circle')
 		}
 		paused = !paused;
 	}
@@ -126,16 +131,8 @@ function game_loop(delta) {
 	let sensors = nono.read_sensors();
 	let motor;
 	// compute controller
-		hits.forEach(obj => {
-			if (obj instanceof Cherry){
-				motor = nono.close_controller( sensors );
-				//console.log(motor + " cherry")
-			}else{
-				motor = nono.avoid_controller( sensors );
-				//console.log(motor + " obstacle")
-			}
-		})
-		nono.move(motor[0], motor[1], dt);
+	motor = nono.nono_controller( sensors );
+	nono.move(motor[0], motor[1], dt);
 
 
     }
@@ -145,8 +142,8 @@ function game_loop(delta) {
 	if (debug && (tics % act_rate) == 0 && tics < 100) {
 
 		let sensors = nono.read_sensors();
-		//let motor = [1,1]
-		let motor = nono.nero_controller(sensors)
+		let motor = [-1,-1]
+		//let motor = nono.nero_controller(sensors)
 		nono.move(motor[0], motor[1], dt);
 
 		console.log(sensors);

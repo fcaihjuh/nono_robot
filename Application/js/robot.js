@@ -269,37 +269,38 @@ class Robot extends PIXI.Container {
 
 	set_nn_parameter(param) {
 		this.nn_parametres = param;
-		//console.log(this.nn_parametres);
 	}
 
 
-    close_controller(sensors){
+	nono_controller(sensors){
 		let vr;
 		let vl;
-
-		vr = Math.tanh(sensors[0] * this.nn_parametres[0] +
-						this.nn_parametres[2] * sensors[1] + bias_value);
-		vl = Math.tanh(sensors[0] * this.nn_parametres[1] +
-						this.nn_parametres[3] * sensors[1] + bias_value);
-
+		hits.forEach(obj => {
+			if (obj instanceof Cherry){
+				// controllelr of close cherry
+				vr = Math.tanh(sensors[0] * this.nn_parametres[0] +
+					this.nn_parametres[2] * sensors[1] + bias_value);
+				vl = Math.tanh(sensors[0] * this.nn_parametres[1] +
+					this.nn_parametres[3] * sensors[1] + bias_value);
+			}else{
+				//controllelr avoid obstacle
+				vl = Math.tanh(sensors[0] * this.nn_parametres[0] +
+					this.nn_parametres[2] * sensors[1] + bias_value);
+				vr = Math.tanh(sensors[0] * this.nn_parametres[1] +
+					this.nn_parametres[3] * sensors[1] + bias_value);
+			}
+		})
 		return [vr, vl];
 	}
 
-	avoid_controller(sensors){
-		let vr;
-		let vl;
-
-		vl = Math.tanh(sensors[0] * this.nn_parametres[0] +
-			this.nn_parametres[2] * sensors[1] + bias_value);
-		vr = Math.tanh(sensors[0] * this.nn_parametres[1] +
-			this.nn_parametres[3] * sensors[1] + bias_value);
-
-		return [vr, vl];
-	}
 
     straight_controller() {
 		return [1,1];
     }
+
+	backward_controller() {
+		return [-1,-1];
+	}
 
     
  
