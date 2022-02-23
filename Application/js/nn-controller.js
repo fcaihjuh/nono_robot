@@ -5,27 +5,33 @@ let myDiagram = objGo(go.Diagram, "myDiagramDiv",
         initialContentAlignment: go.Spot.Center,
         "undoManager.isEnabled": true,
         allowZoom: false,
-        "grid.visible": true,
+        "grid.visible": false,
         "commandHandler.copiesTree": true,
         "commandHandler.deletesTree": true,
-        "draggingTool.dragsTree": true,
+        "draggingTool.dragsTree": false,
     });
 
 
 let myModel = objGo(go.GraphLinksModel);
 myModel.nodeDataArray = [
-    { key: "EG" },
-    { key: "ED" },
+    { key: "E1" },
+    { key: "E2" },
+    { key: "E3" },
+    { key: "E4" },
     { key: "MG" },
     { key: "MD" },
 ];
 
 myModel.linkDataArray =
     [
-        { from: "EG", to: "MG", poid: "w1", text: 10 },
-        { from: "EG", to: "MD", poid: "w2", text: 0 },
-        { from: "ED", to: "MG", poid: "w3", text: 0 },
-        { from: "ED", to: "MD", poid: "w4", text: 10 },
+        { from: "E1", to: "MG", poid: "w1", text: 0},
+        { from: "E1", to: "MD", poid: "w2", text: 0},
+        { from: "E2", to: "MG", poid: "w3", text: 10},
+        { from: "E2", to: "MD", poid: "w4", text: 10},
+        { from: "E3", to: "MG", poid: "w5", text: 10},
+        { from: "E3", to: "MD", poid: "w6", text: 0},
+        { from: "E4", to: "MG", poid: "w7", text: 0},
+        { from: "E4", to: "MD", poid: "w8", text: 10},
     ];
 
 myDiagram.model = myModel;
@@ -83,37 +89,18 @@ myDiagram.addDiagramListener("Modified", function() {
 
 function get_nn_parameter() {
     let linkDataArray = JSON.parse(myDiagram.model.toJson()).linkDataArray;
-    let w1 = linkDataArray[0].text
-    let w2 = linkDataArray[1].text
-    let w3 = linkDataArray[2].text
-    let w4 = linkDataArray[3].text
-    //set_nn_parameter([w1, w2, w3, w4]);
-    return [w1, w2, w3, w4]
-}
-
-/*
-function save(EG, ED) {
-    let linkDataArray = JSON.parse(myDiagram.model.toJson()).linkDataArray;
-    let w1 = linkDataArray[0].text
-    let w2 = linkDataArray[1].text
-    let w3 = linkDataArray[2].text
-    let w4 = linkDataArray[3].text
-
-    return [calculerMG(EG, ED, w1, w3), calculerMD(EG, ED, w2, w4)]
+    let w1 = linkDataArray[0].text;
+    let w2 = linkDataArray[1].text;
+    let w3 = linkDataArray[2].text;
+    let w4 = linkDataArray[3].text;
+    let w5 = linkDataArray[4].text;
+    let w6 = linkDataArray[5].text;
+    let w7 = linkDataArray[6].text;
+    let w8 = linkDataArray[7].text;
+    return [w1, w2, w3, w4, w5, w6, w7, w8];
 }
 
 
-
-function calculerMG(EG, ED, w1, w3){
-    return Math.tanh(w1 * EG + w3 * ED) ;
-}
-
-
-function calculerMD(EG, ED, w2, w4){
-    return  Math.tanh(w2 * EG + w4 * ED);
-}
-
- */
 
 
 
