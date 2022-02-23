@@ -7,7 +7,7 @@ nero_controller(sensors){
     return [vl,vr];
 }
 
-//Neuronr controller parametres
+//Neurone controller parametres
 this.nn_parametres = [1, 0, 0, 1];
 
 

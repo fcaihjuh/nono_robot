@@ -1,4 +1,4 @@
-//import go from "./nn-controller.js";
+
 
 function demo_init(){
 
@@ -37,6 +37,7 @@ function demo_init(){
 	  // when finished loading images, start everyting else
 
 	  demo_start();
+	  demo_reset();
 
 	});
 }
@@ -44,15 +45,17 @@ function demo_init(){
 
 function demo_reset() {
 
-	nono.reset();
+	document.querySelector("#reset").addEventListener("click", ()=>{
+		nono.reset();
 
-	for (let i=0; i<num_cherries; i++) {
-		cherries[i].relocate();
-	}
+		for (let i=0; i<num_cherries; i++) {
+			cherries[i].relocate();
+		}
 
-	elapsed =0;
-	tics = 0;
-	pause = true;
+		elapsed = 0;
+		tics 	= 0;
+		pause 	= true;
+	})
 }
 
 
@@ -97,23 +100,33 @@ function demo_start() {
     
     }
 
-    let start = document.querySelector("#start");
+	// Add the event to the button
+	button_event();
+    
+}
+
+
+function button_event() {
+	let start = document.querySelector("#start");
 	start.onclick = function () {
 		console.log(paused);
 		if(!paused){
 			nono.set_nn_parameter(get_nn_parameter());
 			app.ticker.add((delta) => game_loop(delta));
 			app.ticker.start();
+
+			// change icon of button
 			start.classList.remove("bi-play-circle");
 			start.classList.add('bi-pause-circle')
 		}else{
 			app.ticker.stop();
+
+			//change icon of button
 			start.classList.remove("bi-pause-circle");
-			start.classList.add('bi-play-circle')
+			start.classList.add('bi-play-circle');
 		}
 		paused = !paused;
 	}
-    
 }
 
 function game_loop(delta) {
