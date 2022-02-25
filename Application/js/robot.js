@@ -55,6 +55,7 @@ class Robot extends PIXI.Container {
 		this.sprite.anchor.y = 0.5;
 		this.sprite.name = "Robot sprite";
 
+
 		// Properties
 
 		this.robot_w = this.sprite.width;
@@ -66,6 +67,7 @@ class Robot extends PIXI.Container {
 		this.pivot.y = y;
 		this.rotation = r;
 		this.param_go = get_nn_parameter();
+		//this.score = 0;
 
 		// The sensors
 
@@ -133,6 +135,13 @@ class Robot extends PIXI.Container {
 
 				// eat
 				obj.relocate();
+				score ++;
+
+				document.querySelector("#score").style.width = score * 0.01 * 400 + "px";
+				document.querySelector("#score").style.visibility = "unset";
+				document.querySelector("#pointer").style.left = score * 0.01 * 400 + "px";
+				//document.querySelector("#battery").style.width += 400 + "px";
+
 
 			} else {
 
@@ -144,7 +153,7 @@ class Robot extends PIXI.Container {
 						this.sensor_values[j] = value;
 					if (obj instanceof Obstacle)
 						this.sensor_values[j+2] = value;
-					console.log(value);
+					//console.log(value);
 				}
 			}
 		}
@@ -250,7 +259,7 @@ class Robot extends PIXI.Container {
 	 */
 	set_nn_parameter(param) {
 		this.nn_parametres = param;
-		console.log(param)
+		//console.log(param)
 	}
 
 

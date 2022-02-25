@@ -21,6 +21,8 @@ let nono = null;
 
 let elapsed = 0.0;
 let tics    = 0;
+let score   = 0;
+let battery   = 100;
 
 
 const debug = false; // fix the number of cherries to 1

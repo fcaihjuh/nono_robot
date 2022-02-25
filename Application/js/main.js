@@ -151,6 +151,9 @@ function init_events() {
 		elapsed = 0;
 		tics 	= 0;
 		paused 	= true;
+		score 	= 0;
+		document.querySelector("#battery").style.width =  0 + "px";
+		document.querySelector("#score").style.width =  0 + "px";
 	})
 
 	document.querySelector("#update").addEventListener("click", ()=>{
@@ -167,12 +170,21 @@ function game_loop(delta) {
 		elapsed += dt;
 		tics++;
 
+
+		let currentTime = elapsed;
+		console.log(elapsed);
+		let totalTime = 100;
+		let rate = currentTime / totalTime;
+		document.querySelector("#battery").style.width = rate * 400 + "px"
+		//document.querySelector("#pointer").style.left =  rate * 400 + "px"
+
+
 		// robot sens/ act loop
 		if (!debug && (tics % act_rate) == 0) {
 
 			// read sensors
 			let sensors = nono.read_sensors();
-			console.log(sensors);
+			//console.log(sensors);
 			let motor;
 			// compute controller
 			motor = nono.nono_controller(sensors);
