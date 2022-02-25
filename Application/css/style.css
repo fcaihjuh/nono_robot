@@ -1,8 +1,9 @@
 #myDiagramDiv{
     margin: auto;
-    width: 400px;
+    width: 200px;
     height: 220px;
     background-color: #ddd;
+    
 }
 
 .buttons{
@@ -10,7 +11,7 @@
 }
 
 .controleur{
-    width: 400px;
+    width: 200px;
 }
 
 .vision{

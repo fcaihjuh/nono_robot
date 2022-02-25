@@ -8,7 +8,7 @@ function make_obstacle(count, parent) {
 				 Math.random() * app.renderer.height,
 				 Math.random() * Math.PI * 2 );
 
-		obstacles.push( obstacle );
+	obstacles.push( obstacle );
 	parent.addChild( obstacle );
 
     }
@@ -29,6 +29,14 @@ class Obstacle extends PIXI.Sprite {
 	this.name = "Obtacle number "+id;
 	this.tagged = false;
     }
+
+	relocate(){
+      
+		this.x = Math.random() * app.renderer.width;
+		this.y = Math.random() * app.renderer.height;
+		this.rotation = Math.random() * Math.PI * 2 ;
+  
+	  }
 
 }
 

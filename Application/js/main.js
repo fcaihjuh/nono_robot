@@ -13,12 +13,15 @@ function demo_init(){
     // Create a Pixi Application
     
     app = new PIXI.Application({
-	width: 850,        // default: 800
-	height: 500,        // default: 600
+	width: 1030,        // default: 800
+	height: 760,        // default: 600
 	antialias: true,    // default: false
 	transparent: false, // default: false
-	resolution: 1       // default: 1
+	resolution: 1,      // default: 1
+	//autoResize: true
     });
+	
+
 
     // Load ressources (images for sprites) 
     
@@ -37,7 +40,7 @@ function demo_init(){
 	  // when finished loading images, start everyting else
 
 	  demo_start();
-
+		
 	});
 }
 
@@ -50,7 +53,8 @@ function demo_start() {
   
     // Add the canvas (app.view) to the HTML document
 
-	document.body.appendChild(app.view);
+	document.getElementById("carte").appendChild(app.view);
+
 
     // Set the background
 
@@ -129,6 +133,9 @@ function init_events() {
 		for (let i=0; i<num_cherries; i++) {
 			cherries[i].relocate();
 		}
+		for (let i=0; i<num_obstacles; i++) {
+			obstacles[i].relocate();
+		}
 
 		elapsed = 0;
 		tics 	= 0;
@@ -137,6 +144,7 @@ function init_events() {
 
 	document.querySelector("#update").addEventListener("click", ()=>{
 		nono.set_nn_parameter(get_nn_parameter());
+		
 	})
 }
 

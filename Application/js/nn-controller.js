@@ -11,8 +11,17 @@ let myDiagram = objGo(go.Diagram, "myDiagramDiv",
         "draggingTool.dragsTree": false,
     });
 
+myDiagram.layout = objGo(go.LayeredDigraphLayout,{ 
+                            direction: 0,
+                            layerSpacing: 150,
+                            columnSpacing: 0,
+                            layeringOption: go.LayeredDigraphLayout.LayerLongestPathSink
+                            });
+
+
 
 let myModel = objGo(go.GraphLinksModel);
+
 myModel.nodeDataArray = [
     { key: "E1" },
     { key: "E2" },
@@ -36,9 +45,10 @@ myModel.linkDataArray =
 
 myDiagram.model = myModel;
 
+
 let linkSelectionAdornmentTemplate =
     objGo(go.Adornment, "Link",
-        objGo(go.Shape,
+        objGo(go.Shape, "Rectangle",
             // isPanelMain declares that this Shape shares the Link.geometry
             { isPanelMain: true, fill: null, stroke: "deepskyblue", strokeWidth: 0 })
     );
@@ -46,7 +56,7 @@ let linkSelectionAdornmentTemplate =
 myDiagram.linkTemplate =
     objGo(go.Link,
         { selectable: true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
-        { relinkableFrom: true, relinkableTo: true, reshapable: true },
+        { relinkableFrom: false, relinkableTo: false, reshapable: false },
         {
             toShortLength: 4
         },
