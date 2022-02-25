@@ -13,11 +13,11 @@ function demo_init(){
     // Create a Pixi Application
     
     app = new PIXI.Application({
-	width: 1030,        // default: 800
-	height: 760,        // default: 600
-	antialias: true,    // default: false
-	transparent: false, // default: false
-	resolution: 1,      // default: 1
+	width: window.innerWidth * 2 /3,      	// default: 800
+	height: window.innerHeight, 			// default: 600
+	antialias: true,    					// default: false
+	transparent: false, 					// default: false
+	resolution: 1,      					// default: 1
 	//autoResize: true
     });
 	
@@ -52,6 +52,17 @@ function demo_init(){
 function demo_start() {
   
     // Add the canvas (app.view) to the HTML document
+	window.onresize = function (){
+		let w = window.innerWidth * 2 /3;
+		let h = window.innerHeight;
+
+		//this part resizes the canvas but keeps ratio the same
+		app.view.style.width = w + "px";
+		app.view.style.height = h + "px";
+
+		//this part adjusts the ratio:
+		app.resize(w, h);
+	}
 
 	document.getElementById("carte").appendChild(app.view);
 

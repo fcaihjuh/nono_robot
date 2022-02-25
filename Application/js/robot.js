@@ -218,7 +218,13 @@ class Robot extends PIXI.Container {
 
     }
 
-    random_controller(sensors) {
+
+	/**
+	 * random move
+	 * @param sensors
+	 * @return {number[]}
+	 */
+	random_controller(sensors) {
 	
 		let dice = Math.random();
 
@@ -238,12 +244,22 @@ class Robot extends PIXI.Container {
     }
 
 
+	/**
+	 * set the param values from gojs
+	 * @param param
+	 */
 	set_nn_parameter(param) {
 		this.nn_parametres = param;
 		console.log(param)
 	}
 
 
+
+	/**
+	 * controller with neural network
+	 * @param sensors
+	 * @return {number[]}
+	 */
 	nono_controller(sensors){
 		let vr;
 		let vl;
@@ -264,11 +280,18 @@ class Robot extends PIXI.Container {
 		return [vr, vl];
 	}
 
-
+	/**
+	 * move straight
+	 * @return {number[]}
+	 */
     straight_controller() {
 		return [1,1];
     }
 
+	/**
+	 * move backward
+	 * @return {number[]}
+	 */
 	backward_controller() {
 		return [-1,-1];
 	}

@@ -1,13 +1,14 @@
 #myDiagramDiv{
     margin: auto;
-    width: 200px;
-    height: 220px;
+    width: 400px;
+    height: 400px;
     background-color: #ddd;
     
 }
 
 .buttons{
     font-size: 2.5em;
+    width: 400px;
 }
 
 .controleur{
@@ -17,4 +18,9 @@
 .vision{
     padding: 2%;
     font-size: 1.5em;
+}
+
+#carte{
+    width: 100%;
+    height: 100%;
 }

@@ -2,21 +2,21 @@
 let objGo = go.GraphObject.make;
 let myDiagram = objGo(go.Diagram, "myDiagramDiv",
     {
-        initialContentAlignment: go.Spot.Center,
-        "undoManager.isEnabled": true,
-        allowZoom: false,
-        "grid.visible": false,
+        initialContentAlignment: go.Spot.Center,// center diagram contents
+        "undoManager.isEnabled": true,          // enable Ctrl-Z to undo and Ctrl-Y to redo
+        allowZoom: false,                       // enable zoom diagram
+        "grid.visible": false,                  //
         "commandHandler.copiesTree": true,
         "commandHandler.deletesTree": true,
         "draggingTool.dragsTree": false,
     });
 
 myDiagram.layout = objGo(go.LayeredDigraphLayout,{ 
-                            direction: 0,
-                            layerSpacing: 150,
-                            columnSpacing: 0,
-                            layeringOption: go.LayeredDigraphLayout.LayerLongestPathSink
-                            });
+    direction: 0,
+    layerSpacing: 150,
+    columnSpacing: 0,
+    layeringOption: go.LayeredDigraphLayout.LayerLongestPathSink
+});
 
 
 
@@ -48,7 +48,7 @@ myDiagram.model = myModel;
 
 let linkSelectionAdornmentTemplate =
     objGo(go.Adornment, "Link",
-        objGo(go.Shape, "Rectangle",
+        objGo(go.Shape,
             // isPanelMain declares that this Shape shares the Link.geometry
             { isPanelMain: true, fill: null, stroke: "deepskyblue", strokeWidth: 0 })
     );
