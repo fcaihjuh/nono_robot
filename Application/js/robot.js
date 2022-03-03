@@ -1,7 +1,7 @@
 function make_robot(parent) {
     nono = new Robot( Math.random() * app.renderer.width,
 		      Math.random() * app.renderer.height,
-		      Math.random() * Math.PI*2 );
+		      Math.random() * Math.PI*2, sensor_range_default );
     
     parent.addChild( nono );
 }
@@ -42,7 +42,7 @@ class Sensor extends PIXI.Graphics {
 
 class Robot extends PIXI.Container {
 
-    constructor(x, y, r) {
+    constructor(x, y, r, s) {
 
 		super();
 
@@ -67,6 +67,7 @@ class Robot extends PIXI.Container {
 		this.pivot.y = y;
 		this.rotation = r;
 		this.param_go = get_nn_parameter();
+		this.sensor_range = s;
 		//this.score = 0;
 
 		// The sensors
@@ -75,7 +76,7 @@ class Robot extends PIXI.Container {
 		this.sensor_values = [];
 		for (let i=0; i<sensor_angles.length; i++) {
 			let s = new Sensor(x, y, sensor_angles[i],
-					   sensor_range, sensor_fov);
+					   this.sensor_range, sensor_fov);
 			this.sensors.push(s);
 			this.sensor_values.push(0);
 			this.sensor_values.push(0);
@@ -101,7 +102,7 @@ class Robot extends PIXI.Container {
 		for (let i=0; i<num_obstacles; i++) {
 			let dist=Math.sqrt((obstacles[i].x-this.x)**2 +
 				(obstacles[i].y-this.y)**2);
-			if (dist<sensor_range && dist != 0 ){
+			if (dist<this.sensor_range && dist != 0 ){
 				hits.push([obstacles[i], dist]);
 			}
 		}
@@ -110,7 +111,7 @@ class Robot extends PIXI.Container {
 		for (let i=0; i<num_cherries; i++) {
 			let dist=Math.sqrt((cherries[i].x-this.x)**2 +
 				(cherries[i].y-this.y)**2);
-			if (dist<sensor_range && dist != 0 ){
+			if (dist<this.sensor_range && dist != 0 ){
 				hits.push([cherries[i], dist]);
 			}
 		}
@@ -206,10 +207,17 @@ class Robot extends PIXI.Container {
 		this.check_bounds();
     }
 
+    reset_sensor(){
+		this.sensor_range = document.getElementById("vision").value;
+		console.log(this.sensor_range);
+		return this.sensor_range;
+	}
+
     reset(){
 		this.x = Math.random() * app.renderer.width;
 		this.y = Math.random() * app.renderer.height;
 		this.rotation = Math.random() * Math.PI*2;
+		this.sensor_range = this.reset_sensor();
 		this.updateTransform();
 	}
 

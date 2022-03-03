@@ -20,10 +20,10 @@ function demo_init(){
 	resolution: 1,      					// default: 1
 	//autoResize: true
     });
-	
 
 
-    // Load ressources (images for sprites) 
+
+    // Load ressources (images for sprites)
     
     PIXI.Loader.shared
       .add('robot', "../assets/nono-small.png")
@@ -99,7 +99,7 @@ function demo_start() {
 		obstacles.push (obst );
 		app.stage.addChild( obst );
       
-		nono = new Robot(100,100,0);
+		nono = new Robot(100,100,0, sensor_range_default);
 		app.stage.addChild( nono );
     
     }
@@ -119,8 +119,7 @@ function init_events() {
 	start.onclick = function () {
 		console.log(paused);
 		if(!paused){
-			nono.set_nn_parameter(get_nn_parameter());
-
+			nono.set_nn_parameter(get_nn_parameter())
 			//app.ticker.start();
 
 			// change icon of button
@@ -137,8 +136,13 @@ function init_events() {
 		paused = !paused;
 	}
 
-
+	console.log(nono.sensor_range);
 	document.querySelector("#reset").addEventListener("click", ()=>{
+
+		app.stage.removeChild(nono);
+		nono = new Robot(100,100,0, sensor_range_default);
+		app.stage.addChild( nono );
+
 		nono.reset();
 
 		for (let i=0; i<num_cherries; i++) {
@@ -160,7 +164,15 @@ function init_events() {
 		nono.set_nn_parameter(get_nn_parameter());
 		
 	})
+
+	document.querySelector("#apply").addEventListener('click', ()=>{
+		app.stage.removeChild(nono);
+		nono = new Robot(100,100,0, nono.reset_sensor());
+		app.stage.addChild( nono );
+	})
+
 }
+
 
 function game_loop(delta) {
 
@@ -171,8 +183,8 @@ function game_loop(delta) {
 		tics++;
 
 
-		let currentTime = elapsed;
-		console.log(elapsed);
+		let currentTime = elapsed/4;
+		//console.log(elapsed);
 		let totalTime = 100;
 		let rate = currentTime / totalTime;
 		document.querySelector("#battery").style.width = rate * 400 + "px"
