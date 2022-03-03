@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Nono</title>
+  <link rel="stylesheet" href=../css/style.css>
+  <!-- boootstrap vue-->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <!-- boootstrap icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
+</head>
+
+<body class="container-fluid">
+<div class="row">
+      <div class="col p-0" id="carte"></div>
+
+    
+      <div class="col p-0">
+
+        <!-- contrôleur -->
+        <div class="controleur">
+          <!-- buttons -->
+          <div class="bg-primary buttons text-center">
+            <a>
+              <i id="start" class="bi bi-play-circle bi-pause-circle"></i>
+            </a>
+            <a>
+              <i id="reset" class="bi bi-arrow-counterclockwise"></i>
+            </a>
+            <a>
+              <i id="update" class="bi bi-arrow-repeat"></i>
+            </a>
+          </div>
+          <!-- neurone -->
+          <div id="myDiagramDiv"></div>
+        </div>
+
+        <!-- battery -->
+        <div class="container-battery">
+          <div class="progressDiv" id="battery"></div>
+        </div>
+
+        <!-- score -->
+        <div class="container-score">
+          <div class="progressDiv" id="score"></div>
+          <div id="pointer">
+            <img src="../assets/cherry.png" alt="cherry.png">
+          </div>
+        </div>
+
+      </div>
+
+</div>
+
+
+<script src="../pixi/pixi.min.js"></script>
+<script src="../js/globals.js"></script>
+<script src="../js/robot.js"></script>
+<script src="../js/cherry.js"></script>
+<script src="../js/main.js"></script>
+<script src="../pixi/go-debug.js"></script>
+<script src="../js/nn-controller.js"></script>
+<script src="../js/obstacle.js"></script>
+
+
+<!-- nono act -->
+<script type="text/javascript">
+  demo_init();
+</script>
+
+
+</body>
+
+</html>

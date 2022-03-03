@@ -26,9 +26,9 @@ function demo_init(){
     // Load ressources (images for sprites) 
     
     PIXI.Loader.shared
-      .add('robot', "assets/nono-small.png")
-      .add('cherry', "assets/cherry.png")
-	  .add('obstacle', "assets/obstacle.png")
+      .add('robot', "../assets/nono-small.png")
+      .add('cherry', "../assets/cherry.png")
+	  .add('obstacle', "../assets/obstacle.png")
       .load(( loader, resources ) => {
 	    
 	  //make sprites 

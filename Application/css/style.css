@@ -1,3 +1,9 @@
+html body{
+    background-color: #202028;
+    text-align:center;
+    font-family: sans-serif;
+}
+
 #myDiagramDiv{
     margin: auto;
     width: 100%;
@@ -52,3 +58,43 @@
     visibility: hidden;
 }
 
+#newGame, #about, #back{
+    text-align: center;
+    vertical-align: middle;
+    border: 2px solid goldenrod;
+    border-radius: 7px;
+    background-color: gold;
+    color: orangeRed;
+    font-size: 32px;
+    font-weight: bold;
+    width: 5em;
+    margin: 5px auto;
+}
+
+#infos{
+    margin: auto;
+    color: orange;
+    font-size: 2em;
+    display: none;
+    background-color: inherit;
+}
+
+#back{
+    display: none;
+}
+
+#newGame:hover{
+    background-color: goldenrod;
+}
+
+#about:hover{
+    background-color: goldenrod;
+}
+
+#newGame:hover{
+    background-color: goldenrod;
+}
+
+#back:hover{
+    background-color: goldenrod;
+}
