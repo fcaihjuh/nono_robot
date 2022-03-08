@@ -39,9 +39,8 @@ html body{
 }
 
 .container-battery{
-    /*transform: scale(-1, 1);*/
+    transform: scale(-1, 1);
     background-image: linear-gradient(rgb(40, 238, 90), #098b00);
-    transform: rotate(90deg);
 }
 
 .progressDiv{
@@ -97,4 +96,8 @@ html body{
 
 #back:hover{
     background-color: goldenrod;
+}
+
+h2{
+    color: white;
 }

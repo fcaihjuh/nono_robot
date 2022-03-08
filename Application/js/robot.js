@@ -140,7 +140,7 @@ class Robot extends PIXI.Container {
 
 				document.querySelector("#score").style.width = score * 0.01 * 400 + "px";
 				document.querySelector("#score").style.visibility = "unset";
-				document.querySelector("#pointer").style.left = score * 0.01 * 400 + "px";
+				//document.querySelector("#pointer").style.left = score * 0.01 * 400 + "px";
 				//document.querySelector("#battery").style.width += 400 + "px";
 
 
