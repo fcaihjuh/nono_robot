@@ -128,7 +128,6 @@ function init_events() {
 
 		}else{
 			//app.ticker.stop();
-
 			//change icon of button
 			start.classList.remove("bi-play-circle");
 			start.classList.add('bi-pause-circle')
@@ -138,10 +137,19 @@ function init_events() {
 
 	console.log(nono.sensor_range);
 	document.querySelector("#reset").addEventListener("click", ()=>{
+		if(sensor_range_default!=sensor_range){
+			app.stage.removeChild(nono);
+			nono = new Robot(100,100,0, sensor_range_default);
+			app.stage.addChild( nono );
+			let vision = document.getElementById("vision");
+			vision.value = 100;
 
-		app.stage.removeChild(nono);
-		nono = new Robot(100,100,0, sensor_range_default);
-		app.stage.addChild( nono );
+			
+		}else{
+			app.stage.removeChild(nono);
+			nono = new Robot(100,100,0, sensor_range_default);
+			app.stage.addChild( nono );
+		}
 
 		nono.reset();
 
@@ -158,6 +166,8 @@ function init_events() {
 		score 	= 0;
 		document.querySelector("#battery").style.width =  0 + "px";
 		document.querySelector("#score").style.width =  0 + "px";
+
+		
 	})
 
 	document.querySelector("#update").addEventListener("click", ()=>{

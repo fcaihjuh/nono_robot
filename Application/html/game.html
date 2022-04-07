@@ -17,13 +17,12 @@
 <div class="row">
       <div class="col p-0" id="carte"></div>
 
-    
-      <div class="col p-0">
+      <div class="col p-0 param">
 
         <!-- contrôleur -->
         <div class="controleur">
           <!-- buttons -->
-          <div class="bg-primary buttons text-center">
+          <div class="bg-warning buttons text-center">
             <a>
               <i id="start" class="bi bi-play-circle bi-pause-circle"></i>
             </a>
@@ -35,25 +34,37 @@
             </a>
           </div>
           <!-- neurone -->
-          <div id="myDiagramDiv"></div>
+          <h3 class="text-warning">Controller</h3>
+          <div class="container">
+            <div id="myDiagramDiv"></div>
+          </div>
         </div>
 
-        <div class="vision">
+       <!--  <div class="vision">
+          <h3 class="text-warning">Vision</h3>
           <input type="number" id="vision" value="100">
           <button type="submit" id="apply">apply</button>
+        </div> -->
+        <div class="container vision">
+          <h3 class="text-warning">Vision</h3>
+          <div class="input-group mb-3">
+            <input type="number" id="vision" value="100" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+              <button class="btn btn-outline-warning" type="submit" id="apply">apply</button>
+            </div>
+          </div>
         </div>
-
         <!-- battery -->
-        <div>
-          <h2 class="text-white">Battery</h2>
+        <div class="container">
+          <h3 class="text-warning">Battery</h3>
           <div class="container-battery">
             <div class="progressDiv" id="battery"></div>
           </div>
         </div>
 
         <!-- score -->
-        <div class="pt-5">
-          <h2 class="text-white">Score</h2>
+        <div class="container">
+          <h3 class="text-warning">Score</h3>
           <div class="container-score">
             <div class="progressDiv" id="score"></div>
           </div>

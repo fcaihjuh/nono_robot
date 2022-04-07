@@ -22,6 +22,8 @@ myDiagram.layout = objGo(go.LayeredDigraphLayout,{
 
 let myModel = objGo(go.GraphLinksModel);
 
+var patternBrush = $(go.Brush, "white");
+
 myModel.nodeDataArray = [
     { key: "E1" },
     { key: "E2" },
@@ -33,8 +35,8 @@ myModel.nodeDataArray = [
 
 myModel.linkDataArray =
     [
-        { from: "E1", to: "MG", poid: "w1", text: 0},
-        { from: "E1", to: "MD", poid: "w2", text: 0},
+        { from: "E1", to: "MG", poid: "w1", text: 0 },
+        { from: "E1", to: "MD", poid: "w2", text: 0 },
         { from: "E2", to: "MG", poid: "w3", text: 10},
         { from: "E2", to: "MD", poid: "w4", text: 10},
         { from: "E3", to: "MG", poid: "w5", text: 10},
@@ -44,6 +46,7 @@ myModel.linkDataArray =
     ];
 
 myDiagram.model = myModel;
+
 
 
 let linkSelectionAdornmentTemplate =
@@ -62,13 +65,13 @@ myDiagram.linkTemplate =
         },
         new go.Binding("points").makeTwoWay(),
         objGo(go.Shape,  // the link path shape
-            { isPanelMain: true, strokeWidth: 2 }),
+            { isPanelMain: true, strokeWidth: 2 , stroke: "black"}),
         objGo(go.Shape,  // the arrowhead
-            { toArrow: "Standard", stroke: null }),
+            { toArrow: "Standard", stroke: "black" }),
         objGo(go.Panel, "Auto",
             new go.Binding("visible", "null").ofObject(),
             objGo(go.Shape, "RoundedRectangle",  // the link shape
-                { fill: "#F8F8F8", stroke: null }),
+                { fill: "gold", stroke: null }),
             objGo(go.TextBlock,
                 {
                     textAlign: "center",
@@ -93,7 +96,6 @@ myDiagram.addDiagramListener("Modified", function() {
         if (idx >= 0) document.title = document.title.substr(0, idx);
     }
 });
-
 
 //let nono = new Robot(1, 2, 3);
 
