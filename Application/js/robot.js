@@ -138,11 +138,8 @@ class Robot extends PIXI.Container {
 				obj.relocate();
 				score ++;
 
-				document.querySelector("#score").style.width = score * 0.01 * 400 + "px";
+				document.querySelector("#score").style.width = score * 0.01 * 30 + "px";
 				document.querySelector("#score").style.visibility = "unset";
-				//document.querySelector("#pointer").style.left = score * 0.01 * 400 + "px";
-				//document.querySelector("#battery").style.width += 400 + "px";
-
 
 			} else {
 
@@ -209,7 +206,7 @@ class Robot extends PIXI.Container {
 
     reset_sensor(){
 		this.sensor_range = document.getElementById("vision").value;
-		console.log(this.sensor_range);
+		//console.log(this.sensor_range);
 		return this.sensor_range;
 	}
 

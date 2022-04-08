@@ -5,7 +5,7 @@ let myDiagram = objGo(go.Diagram, "myDiagramDiv",
         initialContentAlignment: go.Spot.Center,// center diagram contents
         "undoManager.isEnabled": true,          // enable Ctrl-Z to undo and Ctrl-Y to redo
         allowZoom: false,                       // enable zoom diagram
-        "grid.visible": false,                  //
+        "grid.visible": false,                  
         "commandHandler.copiesTree": true,
         "commandHandler.deletesTree": true,
         "draggingTool.dragsTree": false,
@@ -25,24 +25,24 @@ let myModel = objGo(go.GraphLinksModel);
 var patternBrush = $(go.Brush, "white");
 
 myModel.nodeDataArray = [
-    { key: "E1" },
-    { key: "E2" },
-    { key: "E3" },
-    { key: "E4" },
-    { key: "MG" },
-    { key: "MD" },
+    { key: "Food Sensor1" },
+    { key: "Food Sensor2" },
+    { key: "Obstacle Sensor1" },
+    { key: "Obstacle Sensor2" },
+    { key: "Left Motor" },
+    { key: "Right Motor" },
 ];
 
 myModel.linkDataArray =
     [
-        { from: "E1", to: "MG", poid: "w1", text: 0 },
-        { from: "E1", to: "MD", poid: "w2", text: 0 },
-        { from: "E2", to: "MG", poid: "w3", text: 10},
-        { from: "E2", to: "MD", poid: "w4", text: 10},
-        { from: "E3", to: "MG", poid: "w5", text: 10},
-        { from: "E3", to: "MD", poid: "w6", text: 0},
-        { from: "E4", to: "MG", poid: "w7", text: 0},
-        { from: "E4", to: "MD", poid: "w8", text: 10},
+        { from: "Food Sensor1", to: "Left Motor", poid: "w1", text: 0 },
+        { from: "Food Sensor1", to: "Right Motor", poid: "w2", text: 0 },
+        { from: "Food Sensor2", to: "Left Motor", poid: "w3", text: 10},
+        { from: "Food Sensor2", to: "Right Motor", poid: "w4", text: 10},
+        { from: "Obstacle Sensor1", to: "Left Motor", poid: "w5", text: 10},
+        { from: "Obstacle Sensor1", to: "Right Motor", poid: "w6", text: 0},
+        { from: "Obstacle Sensor2", to: "Left Motor", poid: "w7", text: 0},
+        { from: "Obstacle Sensor2", to: "Right Motor", poid: "w8", text: 10},
     ];
 
 myDiagram.model = myModel;

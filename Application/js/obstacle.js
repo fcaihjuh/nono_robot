@@ -1,5 +1,3 @@
-
-
 function make_obstacle(count, parent) {
 
     for (let i =0; i<count; i++){

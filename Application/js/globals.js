@@ -1,5 +1,5 @@
-const robot_speed = 1000;
-const act_rate    = 20;
+const robot_speed = 500;
+const act_rate    = 5;
 
 const sensor_range_default = 100;
 let sensor_range   = 150;
@@ -9,8 +9,8 @@ const sensor_angles  = [ -Math.PI/8, Math.PI/8];
 let paused = false;
 const bias_value = 1;
 
-const num_cherries  = 30;
-const num_obstacles = 10;
+const num_cherries  = 130;
+const num_obstacles = 20;
       
 let app;
 

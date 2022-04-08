@@ -1,5 +1,3 @@
-
-
 function demo_init(){
 
     // check for WebGL
@@ -117,7 +115,7 @@ function demo_start() {
 function init_events() {
 	let start = document.querySelector("#start");
 	start.onclick = function () {
-		console.log(paused);
+		//console.log(paused);
 		if(!paused){
 			nono.set_nn_parameter(get_nn_parameter())
 			//app.ticker.start();
@@ -135,7 +133,7 @@ function init_events() {
 		paused = !paused;
 	}
 
-	console.log(nono.sensor_range);
+	//console.log(nono.sensor_range);
 	document.querySelector("#reset").addEventListener("click", ()=>{
 		if(sensor_range_default!=sensor_range){
 			app.stage.removeChild(nono);
@@ -144,7 +142,7 @@ function init_events() {
 			let vision = document.getElementById("vision");
 			vision.value = 100;
 
-			
+		
 		}else{
 			app.stage.removeChild(nono);
 			nono = new Robot(100,100,0, sensor_range_default);
@@ -172,13 +170,14 @@ function init_events() {
 
 	document.querySelector("#update").addEventListener("click", ()=>{
 		nono.set_nn_parameter(get_nn_parameter());
-		
+				
 	})
 
 	document.querySelector("#apply").addEventListener('click', ()=>{
 		app.stage.removeChild(nono);
 		nono = new Robot(100,100,0, nono.reset_sensor());
 		app.stage.addChild( nono );
+		nono.reset();
 	})
 
 }
